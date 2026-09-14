@@ -12,12 +12,15 @@ app = FastAPI(
     version="2.0"
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-    "http://127.0.0.1:5500",
-    "http://localhost:5500",
-    https://hitam-smart-ai-doubt-portal.vercel.app/,
+@app.get("/cors-test")
+def cors_test():
+    return {
+        "origins": [
+            "http://127.0.0.1:5500",
+            "http://localhost:5500",
+            "https://hitam-smart-ai-doubt-portal.vercel.app"
+        ]
+    },
 ],
     ],
     allow_credentials=True,
