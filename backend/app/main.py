@@ -12,6 +12,26 @@ app = FastAPI(
     version="2.0"
 )
 
+# =====================================================
+# CORS
+# =====================================================
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://127.0.0.1:5500",
+        "http://localhost:5500",
+        "https://hitam-smart-ai-doubt-portal.vercel.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# =====================================================
+# CORS TEST
+# =====================================================
+
 @app.get("/cors-test")
 def cors_test():
     return {
@@ -20,13 +40,7 @@ def cors_test():
             "http://localhost:5500",
             "https://hitam-smart-ai-doubt-portal.vercel.app"
         ]
-    },
-],
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    }
 
 
 def get_db():
@@ -243,10 +257,11 @@ def register_admin(
 ):
     print("========== ADMIN DATA ==========")
     print(admin)
-    print(admin.model_dump())   # If this gives an error, use admin.dict()
+    print(admin.model_dump())
     print("================================")
 
     return crud.create_admin(db, admin)
+
 
 @app.post("/admin/login")
 def login_admin(
