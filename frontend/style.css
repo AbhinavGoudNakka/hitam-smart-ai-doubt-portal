@@ -22,7 +22,7 @@ nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:15px 60px;
+    padding:15px 40px;
     box-shadow:0 5px 15px rgba(0,0,0,.15);
     z-index:999;
 }
@@ -274,11 +274,9 @@ nav ul{
 /* ================= DASHBOARD ================= */
 
 .dashboard{
-
-margin-top:120px;
-
-padding:40px;
-
+    margin:40px auto;
+    padding:40px;
+    max-width:1200px;
 }
 
 .dashboard h1{
@@ -861,4 +859,33 @@ background:#F9A825;
 
 color:#222;
 
+}
+/* ================= HOME PAGE ================= */
+
+body{
+    background:#f5f7fb;
+}
+
+section{
+    animation:fadeUp .6s ease;
+}
+
+.dashboard h1{
+    font-size:40px;
+    color:#0B7A3B;
+    margin-bottom:15px;
+}
+
+.dashboard h2{
+    color:#0B7A3B;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.dashboard p{
+    color:#555;
+}
+
+footer{
+    margin-top:60px;
 }

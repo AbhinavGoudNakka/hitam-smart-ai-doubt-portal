@@ -4,10 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Student Dashboard - HITAM AI Portal</title>
+<title>Student Dashboard - HITAM Smart AI Portal</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -49,7 +48,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 </nav>
 
 <div class="dashboard">
-<div class="dashboard">
 
 <button
 onclick="logout()"
@@ -63,29 +61,27 @@ style="float:right;background:#e74c3c;color:white;padding:10px 20px;border:none;
 
 <p>Ask your academic doubts and receive AI + Faculty verified answers.</p>
 
-<h1>🎓 Student Dashboard</h1>
+<br>
 
-<p>Ask your academic doubts and receive AI + Faculty verified answers.</p>
+<div class="dashboard-card">
+
+<h2 id="welcomeName">Welcome</h2>
+
+<p><b>Roll Number:</b> <span id="welcomeRoll"></span></p>
+
+<p><b>Department:</b> <span id="welcomeDept"></span></p>
+
+<p><b>Year:</b> <span id="welcomeYear"></span></p>
+
+<p><b>Section:</b> <span id="welcomeSection"></span></p>
+
+</div>
 
 <br>
 
 <div class="dashboard-card">
 
 <h2>Submit New Doubt</h2>
-
-<input
-id="rollNo"
-type="text"
-placeholder="Roll Number">
-
-<br><br>
-
-<input
-id="studentName"
-type="text"
-placeholder="Student Name">
-
-<br><br>
 
 <input
 id="category"
@@ -115,7 +111,7 @@ Submit Doubt
 
 <button onclick="loadDoubts()">
 
-Refresh
+🔄 Refresh
 
 </button>
 
@@ -133,15 +129,16 @@ Refresh
 
 </footer>
 
-<!-- Login Protection -->
 <script src="auth.js"></script>
 
 <script>
+
 protectStudent();
+
 </script>
 
-<!-- Student Functions -->
 <script src="script.js"></script>
 
 </body>
+
 </html>
