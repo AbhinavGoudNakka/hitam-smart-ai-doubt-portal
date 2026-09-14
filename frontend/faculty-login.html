@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Faculty Login | HITAM AI</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="login-body">
+
+<div class="login-container">
+
+    <div class="login-box">
+
+        <img src="images/hitam-logo.png" class="login-logo">
+
+        <h1>HITAM</h1>
+
+        <p>Faculty Portal</p>
+
+        <h2>Faculty Login</h2>
+
+        <input
+            type="text"
+            id="facultyId"
+            placeholder="Faculty ID">
+
+        <input
+            type="password"
+            id="facultyPassword"
+            placeholder="Password">
+
+        <button onclick="facultyLogin()">
+            Login
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+const API_URL = "http://127.0.0.1:8000";
+
+async function facultyLogin(){
+
+    const faculty_id =
+        document.getElementById("facultyId").value.trim();
+
+    const password =
+        document.getElementById("facultyPassword").value;
+
+    if(faculty_id === "" || password === ""){
+
+        alert("Please enter Faculty ID and Password");
+        return;
+
+    }
+
+    try{
+
+        const response = await fetch(API_URL + "/faculty/login",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                faculty_id:faculty_id,
+                password:password
+
+            })
+
+        });
+
+        const result = await response.json();
+
+        if(response.ok){
+
+            localStorage.setItem(
+                "faculty",
+                JSON.stringify(result.faculty)
+            );
+
+            alert("✅ Faculty Login Successful");
+
+            window.location.href = "faculty.html";
+
+        }else{
+
+            alert(result.detail || "Invalid Faculty ID, Password or Faculty not approved");
+
+        }
+
+    }catch(error){
+
+        alert("❌ Backend server is not running.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

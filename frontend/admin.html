@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HITAM AI - Admin Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+
+            <img src="images/hitam-logo.png" alt="HITAM Logo">
+
+            <div>
+                <h2>HITAM</h2>
+                <p>AI Doubt Portal</p>
+            </div>
+
+        </div>
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+            <li><a href="student.html">Student</a></li>
+            <li><a href="faculty.html">Faculty</a></li>
+            <li><a href="admin.html" class="active">Admin</a></li>
+
+        </ul>
+
+    </nav>
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <div class="dashboard">
+<button
+onclick="logout()"
+style="float:right;background:#e74c3c;color:white;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;">
+🚪 Logout
+</button>
+
+        <h1>🛠 HITAM Admin Dashboard</h1>
+
+        <p>Manage Students, Faculty and AI Doubts</p>
+
+        <br>
+
+        <div class="dashboard-cards">
+
+            <div class="dashboard-card">
+                <i class="fa-solid fa-user-graduate"></i>
+
+                <h2 id="adminStudents">0</h2>
+
+                <p>Total Students</p>
+            </div>
+
+            <div class="dashboard-card">
+                <i class="fa-solid fa-circle-question"></i>
+
+                <h2 id="adminDoubts">0</h2>
+
+                <p>Total Doubts</p>
+            </div>
+
+            <div class="dashboard-card">
+                <i class="fa-solid fa-hourglass-half"></i>
+
+                <h2 id="adminPending">0</h2>
+
+                <p>Pending</p>
+            </div>
+
+            <div class="dashboard-card">
+                <i class="fa-solid fa-circle-check"></i>
+
+                <h2 id="adminVerified">0</h2>
+
+                <p>Verified</p>
+            </div>
+
+        </div>
+
+        <br><br>
+
+        <h2>📊 Doubts Analytics</h2>
+
+        <canvas id="adminChart"></canvas>
+
+        <br><br>
+
+        <input
+            type="text"
+            id="search"
+            placeholder="🔍 Search Student / Roll No / Subject..."
+            onkeyup="searchDoubts()"
+            style="width:100%;padding:12px;font-size:16px;">
+
+        <br><br>
+
+        <button onclick="loadAdmin()">
+            🔄 Refresh Dashboard
+        </button>
+
+        <br><br>
+
+        <div id="doubts"></div>
+
+        <hr>
+
+        <h2>👨‍🏫 Faculty Approval</h2>
+
+        <button onclick="loadFaculty()">
+            🔄 Refresh Faculty List
+        </button>
+
+        <br><br>
+
+        <table border="1" width="100%" cellpadding="10" cellspacing="0">
+
+            <thead>
+
+                <tr>
+
+                    <th>Faculty ID</th>
+
+                    <th>Name</th>
+
+                    <th>Department</th>
+
+                    <th>Email</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="facultyTable">
+
+            </tbody>
+
+        </table>
+
+        <br><br>
+
+        <footer style="text-align:center;padding:20px;color:gray;">
+
+            HITAM AI Doubt Solving Portal © 2026
+
+        </footer>
+
+    </div>
+<script src="auth.js"></script>
+<script>
+protectAdmin();
+</script>
+<script src="admin.js"></script>
+</body>
+
+</html>

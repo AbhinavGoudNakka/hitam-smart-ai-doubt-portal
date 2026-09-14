@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Dashboard - HITAM AI Portal</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+<img src="images/hitam-logo.png" width="60">
+
+<div>
+
+<h2>HITAM</h2>
+
+<p>Student Portal</p>
+
+</div>
+
+</div>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="student.html" class="active">Student</a></li>
+
+<li><a href="faculty.html">Faculty</a></li>
+
+<li><a href="admin.html">Admin</a></li>
+
+</ul>
+
+</nav>
+
+<div class="dashboard">
+<div class="dashboard">
+
+<button
+onclick="logout()"
+style="float:right;background:#e74c3c;color:white;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;">
+
+🚪 Logout
+
+</button>
+
+<h1>🎓 Student Dashboard</h1>
+
+<p>Ask your academic doubts and receive AI + Faculty verified answers.</p>
+
+<h1>🎓 Student Dashboard</h1>
+
+<p>Ask your academic doubts and receive AI + Faculty verified answers.</p>
+
+<br>
+
+<div class="dashboard-card">
+
+<h2>Submit New Doubt</h2>
+
+<input
+id="rollNo"
+type="text"
+placeholder="Roll Number">
+
+<br><br>
+
+<input
+id="studentName"
+type="text"
+placeholder="Student Name">
+
+<br><br>
+
+<input
+id="category"
+type="text"
+placeholder="Subject">
+
+<br><br>
+
+<textarea
+id="question"
+rows="6"
+placeholder="Enter your doubt..."></textarea>
+
+<br><br>
+
+<button onclick="submitDoubt()">
+
+Submit Doubt
+
+</button>
+
+</div>
+
+<br><br>
+
+<h2>My Doubts</h2>
+
+<button onclick="loadDoubts()">
+
+Refresh
+
+</button>
+
+<br><br>
+
+<div id="doubtList">
+
+</div>
+
+</div>
+
+<footer style="text-align:center;padding:20px;color:gray;">
+
+© 2026 HITAM Smart AI Doubt Resolution Portal
+
+</footer>
+
+<!-- Login Protection -->
+<script src="auth.js"></script>
+
+<script>
+protectStudent();
+</script>
+
+<!-- Student Functions -->
+<script src="script.js"></script>
+
+</body>
+</html>

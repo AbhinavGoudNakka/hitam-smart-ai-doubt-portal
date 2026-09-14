@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Faculty Portal | HITAM AI</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+<img src="images/hitam-logo.png">
+
+<div>
+<h2>HITAM</h2>
+<p>Faculty Portal</p>
+</div>
+
+</div>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+<li><a href="student.html">Students</a></li>
+<li><a href="admin.html">Admin</a></li>
+<li><a href="#" onclick="logout()">Logout</a></li>
+
+</ul>
+
+</nav>
+
+<div class="dashboard">
+<button
+onclick="logout()"
+style="float:right;background:#e74c3c;color:white;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;">
+🚪 Logout
+</button>
+
+<h1>👨‍🏫 Faculty Dashboard</h1>
+
+<div class="dashboard-cards">
+
+<div class="dashboard-card">
+<i class="fa-solid fa-book-open"></i>
+<h2 id="totalDoubts">0</h2>
+<p>Total Doubts</p>
+</div>
+
+<div class="dashboard-card">
+<i class="fa-solid fa-clock"></i>
+<h2 id="pendingDoubts">0</h2>
+<p>Pending</p>
+</div>
+
+<div class="dashboard-card">
+<i class="fa-solid fa-circle-check"></i>
+<h2 id="verifiedDoubts">0</h2>
+<p>Verified</p>
+</div>
+
+</div>
+
+<br>
+
+<input
+type="text"
+id="search"
+placeholder="🔍 Search Student / Subject..."
+onkeyup="searchDoubts()"
+style="width:100%;padding:15px;border-radius:10px;border:1px solid #ccc;margin-bottom:25px;">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Student</th>
+<th>Subject</th>
+<th>Doubt</th>
+<th>🤖 AI Answer</th>
+<th>✍ Faculty Answer</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="doubtTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<script src="auth.js"></script>
+<script>
+protectFaculty();
+</script>
+<script src="faculty.js"></script>
+
+</body>
+</html>

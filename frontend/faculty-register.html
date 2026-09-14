@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty Registration</title>
+</head>
+<body>
+
+<h2>Faculty Registration</h2>
+
+<input type="text" id="faculty_id" placeholder="Faculty ID"><br><br>
+
+<input type="text" id="name" placeholder="Full Name"><br><br>
+
+<input type="text" id="department" placeholder="Department"><br><br>
+
+<input type="email" id="email" placeholder="Email"><br><br>
+
+<input type="password" id="password" placeholder="Password"><br><br>
+
+<button onclick="registerFaculty()">Register</button>
+
+<p id="msg"></p>
+
+<script>
+async function registerFaculty(){
+
+    const data = {
+        faculty_id: document.getElementById("faculty_id").value,
+        name: document.getElementById("name").value,
+        department: document.getElementById("department").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+    };
+
+    const response = await fetch("http://127.0.0.1:8000/faculty/register",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify(data)
+
+    });
+
+    const result = await response.json();
+
+    if(response.ok){
+
+        document.getElementById("msg").innerHTML =
+        "✅ Registration Successful. Wait for Admin Approval.";
+
+    }else{
+
+        document.getElementById("msg").innerHTML =
+        result.detail;
+
+    }
+
+}
+</script>
+
+</body>
+</html>

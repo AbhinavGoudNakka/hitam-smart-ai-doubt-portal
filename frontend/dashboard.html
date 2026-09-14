@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HITAM Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+<img src="images/hitam-logo.png">
+
+<div>
+
+<h2>HITAM</h2>
+
+<p>Dashboard</p>
+
+</div>
+
+</div>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="student.html">Student</a></li>
+
+<li><a href="faculty.html">Faculty</a></li>
+
+</ul>
+
+</nav>
+
+<div class="dashboard">
+
+<h1>Dashboard Overview</h1>
+
+<div class="dashboard-cards">
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-user-graduate"></i>
+
+<h2 id="students">2500+</h2>
+
+<p>Students</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-question"></i>
+
+<h2 id="totalDoubts">0</h2>
+
+<p>Total Doubts</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-robot"></i>
+
+<h2 id="aiReplies">0</h2>
+
+<p>AI Replies</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<h2 id="facultyReplies">0</h2>
+
+<p>Faculty Replies</p>
+
+</div>
+
+</div>
+
+<h2 style="margin-top:50px;">Doubts Overview</h2>
+
+<canvas id="chart" height="100"></canvas>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

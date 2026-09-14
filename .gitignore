@@ -1,0 +1,10 @@
+backend/.env
+backend/hitam_chatbox.db
+
+__pycache__/
+*.pyc
+
+*.zip
+
+venv/
+.env
