@@ -1,38 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Faculty Registration</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Faculty Registration | HITAM AI</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
-<body>
 
-<h2>Faculty Registration</h2>
+<body class="login-body">
 
-<input type="text" id="faculty_id" placeholder="Faculty ID"><br><br>
+<div class="login-container">
 
-<input type="text" id="name" placeholder="Full Name"><br><br>
+<div class="login-box">
 
-<input type="text" id="department" placeholder="Department"><br><br>
+<img src="images/hitam-logo.png" class="login-logo">
 
-<input type="email" id="email" placeholder="Email"><br><br>
+<h1>HITAM</h1>
 
-<input type="password" id="password" placeholder="Password"><br><br>
+<p>Faculty Registration Portal</p>
 
-<button onclick="registerFaculty()">Register</button>
+<h2>Create Faculty Account</h2>
 
-<p id="msg"></p>
+<input
+type="text"
+id="faculty_id"
+placeholder="Faculty ID">
+
+<input
+type="text"
+id="name"
+placeholder="Full Name">
+
+<input
+type="text"
+id="department"
+placeholder="Department">
+
+<input
+type="email"
+id="email"
+placeholder="Email Address">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button onclick="registerFaculty()">
+<i class="fa-solid fa-user-plus"></i>
+Register
+</button>
+
+<p id="msg" style="margin-top:15px;font-weight:bold;"></p>
+
+<br>
+
+<a href="faculty-login.html">
+Already Registered? Login Here
+</a>
+
+</div>
+
+</div>
 
 <script>
+
+const API="http://127.0.0.1:8000";
+
 async function registerFaculty(){
 
-    const data = {
-        faculty_id: document.getElementById("faculty_id").value,
-        name: document.getElementById("name").value,
-        department: document.getElementById("department").value,
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value
-    };
+    const faculty_id=document.getElementById("faculty_id").value.trim();
+    const name=document.getElementById("name").value.trim();
+    const department=document.getElementById("department").value.trim();
+    const email=document.getElementById("email").value.trim();
+    const password=document.getElementById("password").value.trim();
 
-    const response = await fetch("http://127.0.0.1:8000/faculty/register",{
+    if(
+        faculty_id===""||
+        name===""||
+        department===""||
+        email===""||
+        password===""){
+        alert("Please fill all fields.");
+        return;
+    }
+
+    const response=await fetch(API+"/faculty/register",{
 
         method:"POST",
 
@@ -40,26 +101,48 @@ async function registerFaculty(){
             "Content-Type":"application/json"
         },
 
-        body:JSON.stringify(data)
+        body:JSON.stringify({
+
+            faculty_id,
+            name,
+            department,
+            email,
+            password
+
+        })
 
     });
 
-    const result = await response.json();
+    const result=await response.json();
 
     if(response.ok){
 
-        document.getElementById("msg").innerHTML =
-        "✅ Registration Successful. Wait for Admin Approval.";
+        document.getElementById("msg").style.color="green";
 
-    }else{
+        document.getElementById("msg").innerHTML=
+        "✅ Registration Successful.<br>Waiting for Admin Approval.";
 
-        document.getElementById("msg").innerHTML =
-        result.detail;
+        setTimeout(()=>{
+
+            window.location.href="faculty-login.html";
+
+        },2500);
+
+    }
+
+    else{
+
+        document.getElementById("msg").style.color="red";
+
+        document.getElementById("msg").innerHTML=
+        result.detail || "Registration Failed";
 
     }
 
 }
+
 </script>
 
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-const API = "https://hitam-ai-backend-m3ka.onrender.com";
+const API = "http://127.0.0.1:8000";
 
 // ==============================
 // Load All Doubts

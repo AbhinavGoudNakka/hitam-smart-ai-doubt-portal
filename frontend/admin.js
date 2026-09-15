@@ -1,4 +1,4 @@
-const API = "https://hitam-ai-backend-m3ka.onrender.com";
+const API = "http://127.0.0.1:8000";
 
 let chart = null;
 
@@ -8,7 +8,7 @@ let chart = null;
 
 async function loadAdmin() {
 
-    // Load Statistics
+    // Statistics
     const statsResponse = await fetch(API + "/admin/stats");
     const stats = await statsResponse.json();
 
@@ -16,6 +16,15 @@ async function loadAdmin() {
     document.getElementById("adminDoubts").innerHTML = stats.total_doubts;
     document.getElementById("adminPending").innerHTML = stats.pending;
     document.getElementById("adminVerified").innerHTML = stats.verified;
+
+    // Pending Faculty Count
+    const pendingResponse = await fetch(API + "/faculty/pending");
+    const pendingFaculty = await pendingResponse.json();
+
+    const pendingCount = document.getElementById("pendingFacultyCount");
+    if (pendingCount) {
+        pendingCount.innerHTML = pendingFaculty.length;
+    }
 
     // Load Doubts
     const doubtsResponse = await fetch(API + "/doubts");
@@ -26,7 +35,6 @@ async function loadAdmin() {
     doubts.reverse().forEach(d => {
 
         html += `
-
 <div class="doubt-card">
 
 <h3>👨 ${d.student_name}</h3>
@@ -37,23 +45,18 @@ async function loadAdmin() {
 
 <p><b>Question :</b><br>${d.question}</p>
 
-<p><b>🤖 AI Answer :</b><br>${d.answer}</p>
+<p><b>🤖 AI Answer :</b><br>${d.answer || "-"}</p>
 
-<p><b>👨‍🏫 Faculty Answer :</b><br>${d.faculty_answer}</p>
+<p><b>👨‍🏫 Faculty Answer :</b><br>${d.faculty_answer || "-"}</p>
 
-<p><b>Status :</b>
-<span style="color:${d.status==="Verified"?"green":"orange"};">
+<p>
+<b>Status :</b>
+<span style="color:${d.status === "Verified" ? "green" : "orange"};">
 ${d.status}
 </span>
 </p>
 
-${
-d.verified_at
-?
-`<p><b>Verified At :</b> ${d.verified_at}</p>`
-:
-""
-}
+${d.verified_at ? `<p><b>Verified At :</b> ${d.verified_at}</p>` : ""}
 
 <button
 onclick="deleteDoubt(${d.id})"
@@ -64,20 +67,17 @@ Delete
 <hr>
 
 </div>
-
 `;
 
     });
 
     document.getElementById("doubts").innerHTML = html;
 
-    // ===============================
     // Chart
-    // ===============================
 
     const ctx = document.getElementById("adminChart");
 
-    if(chart){
+    if (chart) {
         chart.destroy();
     }
 
@@ -92,36 +92,26 @@ Delete
                 "Verified"
             ],
 
-            datasets: [
+            datasets: [{
+                data: [
+                    stats.pending,
+                    stats.verified
+                ],
 
-                {
-
-                    data: [
-                        stats.pending,
-                        stats.verified
-                    ],
-
-                    backgroundColor: [
-                        "#ff9800",
-                        "#4caf50"
-                    ]
-
-                }
-
-            ]
-
+                backgroundColor: [
+                    "#ff9800",
+                    "#4caf50"
+                ]
+            }]
         },
 
         options: {
-
-            responsive:true,
-
-            plugins:{
-                legend:{
-                    position:"bottom"
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "bottom"
                 }
             }
-
         }
 
     });
@@ -132,18 +122,18 @@ Delete
 // Search Doubts
 // ===============================
 
-function searchDoubts(){
+function searchDoubts() {
 
-    let input=document.getElementById("search").value.toLowerCase();
+    let input = document.getElementById("search").value.toLowerCase();
 
-    let cards=document.querySelectorAll(".doubt-card");
+    let cards = document.querySelectorAll(".doubt-card");
 
-    cards.forEach(card=>{
+    cards.forEach(card => {
 
-        if(card.innerText.toLowerCase().includes(input)){
-            card.style.display="block";
-        }else{
-            card.style.display="none";
+        if (card.innerText.toLowerCase().includes(input)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
         }
 
     });
@@ -154,14 +144,12 @@ function searchDoubts(){
 // Delete Doubt
 // ===============================
 
-async function deleteDoubt(id){
+async function deleteDoubt(id) {
 
-    if(!confirm("Delete this doubt?")){
-        return;
-    }
+    if (!confirm("Delete this doubt?")) return;
 
-    await fetch(API + "/doubts/" + id,{
-        method:"DELETE"
+    await fetch(API + "/doubts/" + id, {
+        method: "DELETE"
     });
 
     alert("Doubt Deleted Successfully");
@@ -244,6 +232,7 @@ async function approveFaculty(id) {
     alert("Faculty Approved Successfully");
 
     loadFaculty();
+    loadAdmin();
 
 }
 
@@ -259,24 +248,93 @@ async function rejectFaculty(id) {
 
     alert("Faculty Rejected Successfully");
 
-    loadFaculty();
+loadAdmin();
+loadFaculty();
+loadStudents();
+loadAdmins();
 
 }
 
 // ===============================
-// Auto Refresh Dashboard
+// Auto Refresh
 // ===============================
 
 setInterval(() => {
 
     loadAdmin();
     loadFaculty();
+    loadStudents();
+    loadAdmins();
 
 }, 10000);
-
-// ===============================
 // Initial Load
-// ===============================
 
 loadAdmin();
 loadFaculty();
+// ===============================
+// Load Students
+// ===============================
+
+async function loadStudents() {
+
+    const response = await fetch(API + "/admin/students");
+    const students = await response.json();
+
+    let html = "";
+
+    students.forEach(s => {
+
+        html += `
+<tr>
+
+<td>${s.roll_no}</td>
+
+<td>${s.name}</td>
+
+<td>${s.department}</td>
+
+<td>${s.year}</td>
+
+<td>${s.section}</td>
+
+</tr>
+`;
+
+    });
+
+    document.getElementById("studentTable").innerHTML = html;
+
+}
+
+// ===============================
+// Load Admins
+// ===============================
+
+async function loadAdmins() {
+
+    const response = await fetch(API + "/admin/admins");
+    const admins = await response.json();
+
+    let html = "";
+
+    admins.forEach(a => {
+
+        html += `
+<tr>
+
+<td>${a.username}</td>
+
+<td>${a.name}</td>
+
+<td>${a.email}</td>
+
+<td>${a.status}</td>
+
+</tr>
+`;
+
+    });
+
+    document.getElementById("adminTable").innerHTML = html;
+
+}

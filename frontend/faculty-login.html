@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -17,31 +18,49 @@
 
 <div class="login-container">
 
-    <div class="login-box">
+<div class="login-box">
 
-        <img src="images/hitam-logo.png" class="login-logo">
+<img src="images/hitam-logo.png" class="login-logo">
 
-        <h1>HITAM</h1>
+<h1>HITAM</h1>
 
-        <p>Faculty Portal</p>
+<p>Faculty Portal</p>
 
-        <h2>Faculty Login</h2>
+<h2>Faculty Login</h2>
 
-        <input
-            type="text"
-            id="facultyId"
-            placeholder="Faculty ID">
+<input
+type="text"
+id="facultyId"
+placeholder="Faculty ID">
 
-        <input
-            type="password"
-            id="facultyPassword"
-            placeholder="Password">
+<input
+type="password"
+id="facultyPassword"
+placeholder="Password">
 
-        <button onclick="facultyLogin()">
-            Login
-        </button>
+<button onclick="facultyLogin()">
+Login
+</button>
 
-    </div>
+<br><br>
+
+<p>
+Don't have a Faculty Account?
+</p>
+
+<button
+onclick="window.location.href='faculty-register.html'"
+style="background:#3498db;">
+Register Here
+</button>
+
+<br><br>
+
+<a href="index.html">
+⬅ Back to Home
+</a>
+
+</div>
 
 </div>
 
@@ -51,66 +70,67 @@ const API_URL = "http://127.0.0.1:8000";
 
 async function facultyLogin(){
 
-    const faculty_id =
-        document.getElementById("facultyId").value.trim();
+const faculty_id =
+document.getElementById("facultyId").value.trim();
 
-    const password =
-        document.getElementById("facultyPassword").value;
+const password =
+document.getElementById("facultyPassword").value;
 
-    if(faculty_id === "" || password === ""){
+if(faculty_id==="" || password===""){
 
-        alert("Please enter Faculty ID and Password");
-        return;
+alert("Please enter Faculty ID and Password");
+return;
 
-    }
+}
 
-    try{
+try{
 
-        const response = await fetch(API_URL + "/faculty/login",{
+const response=await fetch(API_URL+"/faculty/login",{
 
-            method:"POST",
+method:"POST",
 
-            headers:{
-                "Content-Type":"application/json"
-            },
+headers:{
+"Content-Type":"application/json"
+},
 
-            body:JSON.stringify({
+body:JSON.stringify({
 
-                faculty_id:faculty_id,
-                password:password
+faculty_id:faculty_id,
+password:password
 
-            })
+})
 
-        });
+});
 
-        const result = await response.json();
+const result=await response.json();
 
-        if(response.ok){
+if(response.ok){
 
-            localStorage.setItem(
-                "faculty",
-                JSON.stringify(result.faculty)
-            );
+localStorage.setItem(
+"faculty",
+JSON.stringify(result.faculty)
+);
 
-            alert("✅ Faculty Login Successful");
+alert("✅ Faculty Login Successful");
 
-            window.location.href = "faculty.html";
+window.location.href="faculty.html";
 
-        }else{
+}else{
 
-            alert(result.detail || "Invalid Faculty ID, Password or Faculty not approved");
+alert(result.detail || "Invalid Faculty ID, Password or Faculty not approved");
 
-        }
+}
 
-    }catch(error){
+}catch(error){
 
-        alert("❌ Backend server is not running.");
+alert("❌ Backend server is not running.");
 
-    }
+}
 
 }
 
 </script>
 
 </body>
+
 </html>
