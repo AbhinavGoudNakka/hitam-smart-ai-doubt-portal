@@ -1,5 +1,4 @@
-const API = "http://127.0.0.1:8000";
-
+const API = "https://hitam-ai-backend-m3ka.onrender.com";
 // ======================================
 // LOAD ADMIN DASHBOARD
 // ======================================
