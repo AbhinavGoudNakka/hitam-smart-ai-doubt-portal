@@ -162,6 +162,10 @@ def admin_stats(
 
     doubts = db.query(models.Doubt).all()
 
+    faculty = db.query(models.Faculty).count()
+
+    admins = db.query(models.Admin).count()
+
     total = len(doubts)
 
     pending = sum(
@@ -174,8 +178,15 @@ def admin_stats(
         if d.status == "Verified"
     )
 
+    pending_faculty = db.query(models.Faculty).filter(
+        models.Faculty.status == "Pending"
+    ).count()
+
     return {
         "students": students,
+        "faculty": faculty,
+        "admins": admins,
+        "pending_faculty": pending_faculty,
         "total_doubts": total,
         "pending": pending,
         "verified": verified
@@ -290,3 +301,68 @@ def login_admin(
             "status": user.status
         }
     }
+# =====================================================
+# PENDING FACULTY REQUESTS
+# =====================================================
+
+@app.get("/faculty/pending")
+def get_pending_faculty(
+    db: Session = Depends(get_db)
+):
+    return db.query(models.Faculty).filter(
+        models.Faculty.status == "Pending"
+    ).all()# =====================================================
+# APPROVED FACULTY
+# =====================================================
+
+@app.get("/faculty/approved")
+def get_approved_faculty(
+    db: Session = Depends(get_db)
+):
+    return db.query(models.Faculty).filter(
+        models.Faculty.status == "Approved"
+    ).all()
+
+
+# =====================================================
+# REJECTED FACULTY
+# =====================================================
+
+@app.get("/faculty/rejected")
+def get_rejected_faculty(
+    db: Session = Depends(get_db)
+):
+    return db.query(models.Faculty).filter(
+        models.Faculty.status == "Rejected"
+    ).all()
+# =====================================================
+# ADMIN - STUDENT DETAILS
+# =====================================================
+
+@app.get("/admin/students")
+def admin_students(
+    db: Session = Depends(get_db)
+):
+    return db.query(models.Student).all()
+
+
+# =====================================================
+# ADMIN - FACULTY DETAILS
+# =====================================================
+
+@app.get("/admin/faculty")
+def admin_faculty(
+    db: Session = Depends(get_db)
+):
+    return db.query(models.Faculty).all()
+
+
+# =====================================================
+# ADMIN - ADMIN DETAILS
+# =====================================================
+
+@app.get("/admin/admins")
+def admin_admins(
+    db: Session = Depends(get_db)
+):
+    return db.query(models.Admin).all()

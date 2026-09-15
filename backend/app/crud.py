@@ -1,7 +1,9 @@
-from .ai import generate_ai_answer
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
+
 from . import models, schemas
 from .auth import hash_password, verify_password
+from .ai import generate_ai_answer
 
 
 # =====================================================
@@ -54,12 +56,25 @@ def login_student(db: Session, roll_no: str, password: str):
 
 def create_faculty(db: Session, faculty: schemas.FacultyCreate):
 
-    existing = db.query(models.Faculty).filter(
+    existing_id = db.query(models.Faculty).filter(
         models.Faculty.faculty_id == faculty.faculty_id
     ).first()
 
-    if existing:
-        return existing
+    if existing_id:
+        raise HTTPException(
+            status_code=400,
+            detail="Faculty ID already exists"
+        )
+
+    existing_email = db.query(models.Faculty).filter(
+        models.Faculty.email == faculty.email
+    ).first()
+
+    if existing_email:
+        raise HTTPException(
+            status_code=400,
+            detail="Email already registered"
+        )
 
     new_faculty = models.Faculty(
         faculty_id=faculty.faculty_id,
@@ -170,13 +185,15 @@ def login_admin(db: Session, username: str, password: str):
         return admin
 
     return None
+
+
 # =====================================================
 # DOUBT FUNCTIONS
 # =====================================================
 
 def create_doubt(db: Session, doubt: schemas.DoubtCreate):
 
-    ai_answer = f"AI Response for: {doubt.question}"
+    ai_answer = generate_ai_answer(doubt.question)
 
     new_doubt = models.Doubt(
         roll_no=doubt.roll_no,
@@ -232,65 +249,3 @@ def delete_doubt(db: Session, doubt_id: int):
     db.commit()
 
     return {"message": "Deleted Successfully"}
-# ==========================
-# DOUBT FUNCTIONS
-# ==========================
-
-def create_doubt(db: Session, doubt: schemas.DoubtCreate):
-
-    ai_answer = generate_ai_answer(doubt.question)
-
-    new_doubt = models.Doubt(
-        roll_no=doubt.roll_no,
-        student_name=doubt.student_name,
-        category=doubt.category,
-        question=doubt.question,
-        answer=ai_answer,
-        faculty_answer="Waiting for Faculty...",
-        faculty_id="",
-        status="Pending"
-    )
-
-    db.add(new_doubt)
-    db.commit()
-    db.refresh(new_doubt)
-
-    return new_doubt
-
-
-def get_doubts(db: Session):
-
-    return db.query(models.Doubt).all()
-
-
-def answer_doubt(db: Session, doubt_id: int, answer: str):
-
-    doubt = db.query(models.Doubt).filter(
-        models.Doubt.id == doubt_id
-    ).first()
-
-    if not doubt:
-        return None
-
-    doubt.faculty_answer = answer
-    doubt.status = "Verified"
-
-    db.commit()
-    db.refresh(doubt)
-
-    return doubt
-
-
-def delete_doubt(db: Session, doubt_id: int):
-
-    doubt = db.query(models.Doubt).filter(
-        models.Doubt.id == doubt_id
-    ).first()
-
-    if not doubt:
-        return None
-
-    db.delete(doubt)
-    db.commit()
-
-    return {"message": "Doubt deleted successfully"}
