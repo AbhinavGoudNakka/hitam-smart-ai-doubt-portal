@@ -4,18 +4,24 @@ from google import genai
 
 load_dotenv()
 
-api_key = os.getenv("GEMINI_API_KEY")
+API_KEY = os.getenv("GEMINI_API_KEY")
 
-print("Gemini Key:", "Loaded" if api_key else "NOT FOUND")
+print("=" * 60)
+print("Gemini Key Loaded:", bool(API_KEY))
 
-client = genai.Client(api_key=api_key)
+if API_KEY:
+    print("First 12 chars:", API_KEY[:12])
+else:
+    print("NO GEMINI KEY FOUND")
+print("=" * 60)
+
+client = genai.Client(api_key=API_KEY)
 
 
 def generate_ai_answer(question: str):
     try:
-        response = client.models.generate_content(
-            model="gemini-3.6-flash",
-            contents=f"""
+
+        prompt = f"""
 You are an expert engineering faculty member.
 
 Answer the student's academic question clearly.
@@ -25,14 +31,22 @@ Student Question:
 
 Rules:
 - Simple English
-- Bullet points when useful.
-- Maximum 250 words.
-- If code is needed, provide a small example.
+- Bullet points where useful
+- Maximum 250 words
+- Give code example if required
 """
+
+        response = client.models.generate_content(
+            model="gemini-3.6-flash",
+            contents=prompt,
         )
 
         return response.text
 
     except Exception as e:
-        print("GEMINI ERROR:", repr(e))
+        print("=" * 60)
+        print("GEMINI ERROR")
+        print(repr(e))
+        print("=" * 60)
+
         return f"AI Error: {e}"
