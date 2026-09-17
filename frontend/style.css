@@ -1,4 +1,1196 @@
 /* =====================================================
+   HITAM SMART AI DOUBT RESOLUTION PORTAL
+   Premium UI Version 3.0
+===================================================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+font-family:"Poppins",sans-serif;
+}
+
+body{
+
+background:#f5f7fa;
+
+color:#222;
+
+overflow-x:hidden;
+
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:82px;
+
+background:white;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 60px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+z-index:1000;
+
+}
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.logo h2{
+
+color:#006c3f;
+
+font-size:30px;
+
+font-weight:700;
+
+}
+
+.logo p{
+
+color:#666;
+
+font-size:14px;
+
+}
+
+nav ul{
+
+display:flex;
+
+gap:25px;
+
+list-style:none;
+
+align-items:center;
+
+}
+
+nav ul li a{
+
+text-decoration:none;
+
+color:#222;
+
+font-weight:600;
+
+transition:.3s;
+
+padding:10px 16px;
+
+border-radius:8px;
+
+}
+
+nav ul li a:hover{
+
+background:#0f8c4a;
+
+color:white;
+
+}
+
+.active{
+
+background:#0f8c4a;
+
+color:white;
+
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+margin-top:82px;
+
+height:520px;
+
+background:
+
+linear-gradient(rgba(0,60,30,.75),
+
+rgba(0,70,40,.75)),
+
+url("images/campus.jpg");
+
+background-size:cover;
+
+background-position:center;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding:40px;
+
+}
+
+.hero-overlay{
+
+max-width:1100px;
+
+color:white;
+
+}
+
+.hero-logo{
+
+width:120px;
+
+margin-bottom:25px;
+
+}
+
+.hero h1{
+
+font-size:52px;
+
+font-weight:700;
+
+margin-bottom:20px;
+
+}
+
+.hero h3{
+
+font-size:26px;
+
+font-weight:400;
+
+margin-bottom:20px;
+
+color:#e4ffe4;
+
+}
+
+.hero p{
+
+font-size:20px;
+
+line-height:1.8;
+
+margin-bottom:35px;
+
+}
+
+/* ================= HERO BUTTONS ================= */
+
+.hero-buttons{
+
+display:flex;
+
+justify-content:center;
+
+gap:18px;
+
+flex-wrap:wrap;
+
+}
+
+.hero-btn{
+
+background:#0f8c4a;
+
+color:white;
+
+border:none;
+
+padding:15px 28px;
+
+border-radius:50px;
+
+font-size:16px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:.35s;
+
+box-shadow:0 12px 30px rgba(0,0,0,.20);
+
+}
+
+.hero-btn:hover{
+
+background:#14b866;
+
+transform:translateY(-5px);
+
+}
+
+.hero-btn i{
+
+margin-right:8px;
+
+}
+/* =====================================================
+                ABOUT CAMPUS SECTION
+===================================================== */
+
+.about-campus{
+
+position:relative;
+
+background:
+
+linear-gradient(
+
+rgba(0,70,40,.78),
+
+rgba(0,70,40,.78)
+
+),
+
+url("images/campus.jpg");
+
+background-size:cover;
+
+background-position:center;
+
+background-attachment:fixed;
+
+padding:90px 8%;
+
+}
+
+.about-overlay{
+
+max-width:1400px;
+
+margin:auto;
+
+}
+
+.about-content{
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(12px);
+
+-webkit-backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,255,255,.18);
+
+border-radius:25px;
+
+padding:60px;
+
+color:white;
+
+box-shadow:0 20px 50px rgba(0,0,0,.25);
+
+}
+
+.about-content h1{
+
+font-size:48px;
+
+margin-bottom:25px;
+
+font-weight:700;
+
+}
+
+.about-content p{
+
+font-size:19px;
+
+line-height:2;
+
+color:#f3f3f3;
+
+max-width:1050px;
+
+}
+
+/* =====================================================
+                HIGHLIGHT CARDS
+===================================================== */
+
+.highlight-box{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+margin-top:45px;
+
+}
+
+.highlight-card{
+
+background:rgba(255,255,255,.10);
+
+backdrop-filter:blur(15px);
+
+padding:30px;
+
+border-radius:20px;
+
+text-align:center;
+
+transition:.35s;
+
+border:1px solid rgba(255,255,255,.15);
+
+}
+
+.highlight-card:hover{
+
+transform:translateY(-10px);
+
+background:#0f8c4a;
+
+}
+
+.highlight-card i{
+
+font-size:40px;
+
+margin-bottom:20px;
+
+color:#ffffff;
+
+}
+
+.highlight-card h3{
+
+font-size:22px;
+
+margin-bottom:12px;
+
+}
+
+.highlight-card p{
+
+font-size:15px;
+
+line-height:1.6;
+
+}
+
+/* =====================================================
+                STATISTICS
+===================================================== */
+
+.stats-section{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+padding:70px 8%;
+
+background:#f7faf9;
+
+}
+
+.stats-card{
+
+background:white;
+
+padding:35px;
+
+border-radius:20px;
+
+text-align:center;
+
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.stats-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 25px 45px rgba(0,0,0,.15);
+
+}
+
+.stats-card i{
+
+font-size:48px;
+
+color:#0f8c4a;
+
+margin-bottom:20px;
+
+}
+
+.stats-card h2{
+
+font-size:38px;
+
+color:#0f8c4a;
+
+margin-bottom:10px;
+
+}
+
+.stats-card p{
+
+font-size:18px;
+
+color:#666;
+
+font-weight:600;
+
+}
+
+/* =====================================================
+                DASHBOARD SECTIONS
+===================================================== */
+
+.dashboard{
+
+padding:80px 8%;
+
+background:#ffffff;
+
+}
+
+.dashboard h2{
+
+text-align:center;
+
+font-size:42px;
+
+margin-bottom:40px;
+
+color:#006c3f;
+
+position:relative;
+
+}
+
+.dashboard h2::after{
+
+content:"";
+
+display:block;
+
+width:90px;
+
+height:5px;
+
+background:#0f8c4a;
+
+margin:15px auto 0;
+
+border-radius:30px;
+
+}
+
+.dashboard p{
+
+font-size:18px;
+
+line-height:1.9;
+
+color:#555;
+
+}
+/* =====================================================
+                FEATURE CARDS
+===================================================== */
+
+.dashboard-cards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:30px;
+
+margin-top:40px;
+
+}
+
+.dashboard-card{
+
+background:white;
+
+padding:35px;
+
+border-radius:22px;
+
+text-align:center;
+
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+transition:.35s;
+
+position:relative;
+
+overflow:hidden;
+
+cursor:pointer;
+
+}
+
+.dashboard-card::before{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:100%;
+
+height:6px;
+
+background:#0f8c4a;
+
+transform:scaleX(0);
+
+transition:.35s;
+
+}
+
+.dashboard-card:hover::before{
+
+transform:scaleX(1);
+
+}
+
+.dashboard-card:hover{
+
+transform:translateY(-12px);
+
+box-shadow:0 25px 50px rgba(0,0,0,.18);
+
+}
+
+.dashboard-card i{
+
+font-size:55px;
+
+color:#0f8c4a;
+
+margin-bottom:25px;
+
+transition:.35s;
+
+}
+
+.dashboard-card:hover i{
+
+transform:scale(1.15);
+
+color:#16a34a;
+
+}
+
+.dashboard-card h3{
+
+font-size:24px;
+
+margin-bottom:15px;
+
+color:#006c3f;
+
+}
+
+.dashboard-card p{
+
+font-size:17px;
+
+line-height:1.8;
+
+color:#666;
+
+}
+
+/* =====================================================
+                DEPARTMENTS
+===================================================== */
+
+#departments{
+
+background:#f7faf9;
+
+}
+
+#departments .dashboard-card{
+
+border-top:5px solid #0f8c4a;
+
+}
+
+#departments .dashboard-card:hover{
+
+background:#0f8c4a;
+
+color:white;
+
+}
+
+#departments .dashboard-card:hover h3,
+
+#departments .dashboard-card:hover p,
+
+#departments .dashboard-card:hover i{
+
+color:white;
+
+}
+
+/* =====================================================
+                OBJECTIVES
+===================================================== */
+
+#objectives{
+
+background:white;
+
+}
+
+#objectives .dashboard-card{
+
+background:linear-gradient(180deg,#ffffff,#f8fff9);
+
+}
+
+#objectives .dashboard-card:hover{
+
+background:#0f8c4a;
+
+}
+
+#objectives .dashboard-card:hover h3,
+
+#objectives .dashboard-card:hover p,
+
+#objectives .dashboard-card:hover i{
+
+color:white;
+
+}
+
+/* =====================================================
+                WHY CHOOSE HITAM
+===================================================== */
+
+.dashboard-card h3{
+
+font-weight:700;
+
+}
+
+.dashboard-card p{
+
+font-weight:400;
+
+}
+
+/* =====================================================
+                CTA SECTION
+===================================================== */
+
+.cta-section{
+
+background:
+
+linear-gradient(
+
+rgba(0,70,40,.92),
+
+rgba(0,70,40,.92)
+
+),
+
+url("images/campus.jpg");
+
+background-size:cover;
+
+background-position:center;
+
+padding:90px 8%;
+
+text-align:center;
+
+color:white;
+
+}
+
+.cta-content{
+
+max-width:950px;
+
+margin:auto;
+
+}
+
+.cta-content h1{
+
+font-size:50px;
+
+margin-bottom:25px;
+
+}
+
+.cta-content p{
+
+font-size:21px;
+
+line-height:1.9;
+
+margin-bottom:40px;
+
+color:#f2f2f2;
+
+}
+
+.cta-buttons{
+
+display:flex;
+
+justify-content:center;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+}
+
+.cta-buttons .hero-btn{
+
+font-size:17px;
+
+padding:16px 34px;
+
+}
+/* =====================================================
+                    PREMIUM FOOTER
+===================================================== */
+
+.footer{
+
+background:#06351f;
+
+color:white;
+
+padding:70px 8% 25px;
+
+}
+
+.footer-container{
+
+display:grid;
+
+grid-template-columns:2fr 1fr 1fr 1fr;
+
+gap:40px;
+
+margin-bottom:40px;
+
+}
+
+.footer-column h2{
+
+margin-top:15px;
+
+margin-bottom:20px;
+
+font-size:28px;
+
+}
+
+.footer-column h3{
+
+margin-bottom:20px;
+
+font-size:22px;
+
+color:#7dffb0;
+
+}
+
+.footer-column p{
+
+line-height:1.9;
+
+margin-bottom:12px;
+
+color:#e8e8e8;
+
+}
+
+.footer-column ul{
+
+list-style:none;
+
+padding:0;
+
+}
+
+.footer-column ul li{
+
+margin-bottom:14px;
+
+}
+
+.footer-column ul li a{
+
+text-decoration:none;
+
+color:white;
+
+transition:.3s;
+
+}
+
+.footer-column ul li a:hover{
+
+padding-left:8px;
+
+color:#7dffb0;
+
+}
+
+.footer hr{
+
+border:none;
+
+height:1px;
+
+background:rgba(255,255,255,.15);
+
+margin:30px 0;
+
+}
+
+.footer-bottom{
+
+text-align:center;
+
+}
+
+.footer-bottom p{
+
+margin:10px 0;
+
+color:#d9d9d9;
+
+}
+
+.social-icons{
+
+display:flex;
+
+justify-content:center;
+
+gap:18px;
+
+margin:20px 0;
+
+}
+
+.social-icons a{
+
+width:50px;
+
+height:50px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:#0f8c4a;
+
+border-radius:50%;
+
+color:white;
+
+font-size:22px;
+
+transition:.35s;
+
+text-decoration:none;
+
+}
+
+.social-icons a:hover{
+
+background:#18b765;
+
+transform:translateY(-6px);
+
+}
+
+/* =====================================================
+                SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#edf5ef;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#0f8c4a;
+
+border-radius:10px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#18b765;
+
+}
+
+/* =====================================================
+                    ANIMATIONS
+===================================================== */
+
+.hero,
+.about-campus,
+.dashboard,
+.cta-section{
+
+animation:fadeUp 1s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* =====================================================
+                RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+nav{
+
+padding:0 20px;
+
+}
+
+nav ul{
+
+gap:12px;
+
+}
+
+.hero h1{
+
+font-size:40px;
+
+}
+
+.hero h3{
+
+font-size:22px;
+
+}
+
+.highlight-box{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.stats-section{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.footer-container{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+nav{
+
+flex-direction:column;
+
+height:auto;
+
+padding:15px;
+
+}
+
+nav ul{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+margin-top:15px;
+
+}
+
+.hero{
+
+height:auto;
+
+padding:100px 20px 60px;
+
+}
+
+.hero h1{
+
+font-size:32px;
+
+}
+
+.hero h3{
+
+font-size:18px;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+}
+
+.hero-btn{
+
+width:100%;
+
+}
+
+.highlight-box{
+
+grid-template-columns:1fr;
+
+}
+
+.stats-section{
+
+grid-template-columns:1fr;
+
+}
+
+.dashboard-cards{
+
+grid-template-columns:1fr;
+
+}
+
+.footer-container{
+
+grid-template-columns:1fr;
+
+text-align:center;
+
+}
+
+.about-content{
+
+padding:35px;
+
+}
+
+.about-content h1{
+
+font-size:34px;
+
+}
+
+.about-content p{
+
+font-size:16px;
+
+}
+
+.cta-content h1{
+
+font-size:34px;
+
+}
+
+.cta-content p{
+
+font-size:17px;
+
+}
+
+}
+/* =====================================================
                     LOGIN PAGE
 ===================================================== */
 
