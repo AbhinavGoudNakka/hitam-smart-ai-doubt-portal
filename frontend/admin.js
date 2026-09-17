@@ -9,26 +9,19 @@ let chart = null;
 async function loadAdmin() {
 
     // Statistics
-    const statsResponse = await fetch(API + "/admin/stats");
-    const stats = await statsResponse.json();
+const [
+    statsResponse,
+    pendingResponse,
+    doubtsResponse
+] = await Promise.all([
+    fetch(API + "/admin/stats"),
+    fetch(API + "/faculty/pending"),
+    fetch(API + "/doubts")
+]);
 
-    document.getElementById("adminStudents").innerHTML = stats.students;
-    document.getElementById("adminDoubts").innerHTML = stats.total_doubts;
-    document.getElementById("adminPending").innerHTML = stats.pending;
-    document.getElementById("adminVerified").innerHTML = stats.verified;
-
-    // Pending Faculty Count
-    const pendingResponse = await fetch(API + "/faculty/pending");
-    const pendingFaculty = await pendingResponse.json();
-
-    const pendingCount = document.getElementById("pendingFacultyCount");
-    if (pendingCount) {
-        pendingCount.innerHTML = pendingFaculty.length;
-    }
-
-    // Load Doubts
-    const doubtsResponse = await fetch(API + "/doubts");
-    const doubts = await doubtsResponse.json();
+const stats = await statsResponse.json();
+const pendingFaculty = await pendingResponse.json();
+const doubts = await doubtsResponse.json();
 
     let html = "";
 
@@ -231,8 +224,10 @@ async function approveFaculty(id) {
 
     alert("Faculty Approved Successfully");
 
-    loadFaculty();
-    loadAdmin();
+await loadAdmin();
+await loadFaculty();
+await loadStudents();
+await loadAdmins();
 
 }
 
@@ -248,10 +243,10 @@ async function rejectFaculty(id) {
 
     alert("Faculty Rejected Successfully");
 
-loadAdmin();
-loadFaculty();
-loadStudents();
-loadAdmins();
+await loadAdmin();
+await loadFaculty();
+await loadStudents();
+await loadAdmins();
 
 }
 
@@ -269,8 +264,12 @@ setInterval(() => {
 }, 10000);
 // Initial Load
 
+// Initial Load
+
 loadAdmin();
 loadFaculty();
+loadStudents();
+loadAdmins();
 // ===============================
 // Load Students
 // ===============================

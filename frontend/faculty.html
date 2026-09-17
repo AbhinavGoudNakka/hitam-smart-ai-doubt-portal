@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -16,15 +17,20 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
+
 <nav>
 
 <div class="logo">
 
-<img src="images/hitam-logo.png">
+<img src="images/hitam-logo.png" alt="HITAM Logo">
 
 <div>
+
 <h2>HITAM</h2>
+
 <p>Faculty Portal</p>
+
 </div>
 
 </div>
@@ -32,67 +38,129 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 <ul>
 
 <li><a href="index.html">Home</a></li>
+
 <li><a href="student.html">Students</a></li>
+
 <li><a href="admin.html">Admin</a></li>
+
 <li><a href="#" onclick="logout()">Logout</a></li>
 
 </ul>
 
 </nav>
 
+<!-- ================= FACULTY DASHBOARD ================= -->
+
 <div class="dashboard">
+
+<div class="dashboard-header">
+
+<div>
+
+<h1>
+
+<i class="fa-solid fa-chalkboard-user"></i>
+
+Faculty Dashboard
+
+</h1>
+
+<p id="facultyWelcome">
+
+Welcome Faculty
+
+</p>
+
+</div>
+
 <button
-onclick="logout()"
-style="float:right;background:#e74c3c;color:white;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;">
-🚪 Logout
+class="hero-btn logout-btn"
+onclick="logout()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
 </button>
 
-<h1>👨‍🏫 Faculty Dashboard</h1>
+</div>
+
+<!-- ================= STAT CARDS ================= -->
 
 <div class="dashboard-cards">
 
 <div class="dashboard-card">
+
 <i class="fa-solid fa-book-open"></i>
+
 <h2 id="totalDoubts">0</h2>
+
 <p>Total Doubts</p>
+
 </div>
 
 <div class="dashboard-card">
-<i class="fa-solid fa-clock"></i>
+
+<i class="fa-solid fa-hourglass-half"></i>
+
 <h2 id="pendingDoubts">0</h2>
-<p>Pending</p>
+
+<p>Pending Doubts</p>
+
 </div>
 
 <div class="dashboard-card">
+
 <i class="fa-solid fa-circle-check"></i>
+
 <h2 id="verifiedDoubts">0</h2>
-<p>Verified</p>
-</div>
+
+<p>Verified Doubts</p>
 
 </div>
 
-<br>
+</div>
+
+<!-- ================= SEARCH ================= -->
 
 <input
-type="text"
-id="search"
-placeholder="🔍 Search Student / Subject..."
-onkeyup="searchDoubts()"
-style="width:100%;padding:15px;border-radius:10px;border:1px solid #ccc;margin-bottom:25px;">
 
-<table>
+class="search-box"
+
+type="text"
+
+id="search"
+
+placeholder="🔍 Search Student / Subject / Question..."
+
+onkeyup="searchDoubts()">
+
+<br><br>
+
+<!-- ================= TABLE ================= -->
+
+<div class="table-container">
+
+<table class="modern-table">
 
 <thead>
 
 <tr>
 
 <th>ID</th>
+
 <th>Student</th>
+
 <th>Subject</th>
+
 <th>Doubt</th>
+
 <th>🤖 AI Answer</th>
+
 <th>✍ Faculty Answer</th>
+
 <th>Status</th>
+
 <th>Action</th>
 
 </tr>
@@ -107,11 +175,18 @@ style="width:100%;padding:15px;border-radius:10px;border:1px solid #ccc;margin-b
 
 </div>
 
+</div>
+
 <script src="auth.js"></script>
+
 <script>
+
 protectFaculty();
+
 </script>
+
 <script src="faculty.js"></script>
 
 </body>
+
 </html>

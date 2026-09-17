@@ -2,17 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HITAM AI - Admin Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title>HITAM AI - Admin Dashboard</title>
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
@@ -21,165 +23,289 @@
 
 <nav>
 
-    <div class="logo">
-        <img src="images/hitam-logo.png" alt="HITAM Logo">
+<div class="logo">
 
-        <div>
-            <h2>HITAM</h2>
-            <p>AI Doubt Portal</p>
-        </div>
-    </div>
+<img src="images/hitam-logo.png" alt="HITAM Logo">
 
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="student.html">Student</a></li>
-        <li><a href="faculty.html">Faculty</a></li>
-        <li><a href="admin.html" class="active">Admin</a></li>
-    </ul>
+<div>
+
+<h2>HITAM</h2>
+
+<p>AI Doubt Resolution Portal</p>
+
+</div>
+
+</div>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="student.html">Student</a></li>
+
+<li><a href="faculty.html">Faculty</a></li>
+
+<li><a href="admin.html" class="active">Admin</a></li>
+
+</ul>
 
 </nav>
 
 <!-- ================= DASHBOARD ================= -->
 
-<div class="dashboard">
+<section class="dashboard">
 
-    <button
-        onclick="logout()"
-        style="float:right;background:#e74c3c;color:white;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;">
-        🚪 Logout
-    </button>
+<div class="dashboard-header">
 
-    <h1>🛠 HITAM Admin Dashboard</h1>
+<div>
 
-    <p>Manage Students, Faculty and AI Doubts</p>
+<h1 id="adminWelcome">
+<i class="fa-solid fa-user-shield"></i>
+HITAM Admin Dashboard
+</h1>
 
-    <br>
+<p>
+Manage Students, Faculty and AI Doubts from one place.
+</p>
 
-    <!-- ================= CARDS ================= -->
+</div>
 
-    <div class="dashboard-cards">
+<button class="hero-btn logout-btn" onclick="logout()">
 
-        <div class="dashboard-card">
-            <i class="fa-solid fa-user-graduate"></i>
-            <h2 id="adminStudents">0</h2>
-            <p>Total Students</p>
-        </div>
+<i class="fa-solid fa-right-from-bracket"></i>
 
-        <div class="dashboard-card">
-            <i class="fa-solid fa-circle-question"></i>
-            <h2 id="adminDoubts">0</h2>
-            <p>Total Doubts</p>
-        </div>
+Logout
 
-        <div class="dashboard-card">
-            <i class="fa-solid fa-hourglass-half"></i>
-            <h2 id="adminPending">0</h2>
-            <p>Pending Doubts</p>
-        </div>
-
-        <div class="dashboard-card">
-            <i class="fa-solid fa-circle-check"></i>
-            <h2 id="adminVerified">0</h2>
-            <p>Verified Doubts</p>
-        </div>
-
-        <!-- NEW CARD -->
-
-        <div class="dashboard-card">
-            <i class="fa-solid fa-user-clock"></i>
-            <h2 id="pendingFacultyCount">0</h2>
-            <p>Pending Faculty</p>
-        </div>
-
-    </div>
-
-    <br><br>
-
-    <!-- ================= CHART ================= -->
-
-    <h2>📊 Doubts Analytics</h2>
-
-    <canvas id="adminChart"></canvas>
-
-    <br><br>
-
-    <!-- ================= SEARCH ================= -->
-
-    <input
-        type="text"
-        id="search"
-        placeholder="🔍 Search Student / Roll No / Subject..."
-        onkeyup="searchDoubts()"
-        style="width:100%;padding:12px;font-size:16px;">
-
-    <br><br>
-
-    <button onclick="loadAdmin()">
-        🔄 Refresh Dashboard
-    </button>
-
-    <br><br>
-
-    <!-- ================= DOUBTS ================= -->
-
-    <div id="doubts"></div>
-
-    <hr>
-
-    <!-- ================= FACULTY APPROVAL ================= -->
-
-    <h2>👨‍🏫 Faculty Approval Requests</h2>
-
-    <button onclick="loadFaculty()">
-        🔄 Refresh Faculty List
-    </button>
-
-    <br><br>
-
-    <table border="1" width="100%" cellpadding="10" cellspacing="0">
-
-        <thead>
-
-            <tr>
-
-                <th>Faculty ID</th>
-                <th>Name</th>
-                <th>Department</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Action</th>
-
-            </tr>
-
-        </thead>
-
-        <tbody id="facultyTable">
-
-        </tbody>
-
-    </table>
-
-    <br><br>
-<hr><br>
-
-<h2>👨‍🎓 Student Details</h2>
-
-<button onclick="loadStudents()">
-    🔄 Refresh Students
 </button>
+
+</div>
+
+<!-- ================= STATISTICS ================= -->
+
+<div class="dashboard-cards">
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-user-graduate"></i>
+
+<h2 id="adminStudents">0</h2>
+
+<p>Total Students</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-circle-question"></i>
+
+<h2 id="adminDoubts">0</h2>
+
+<p>Total Doubts</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-hourglass-half"></i>
+
+<h2 id="adminPending">0</h2>
+
+<p>Pending Doubts</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<h2 id="adminVerified">0</h2>
+
+<p>Verified Doubts</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-user-clock"></i>
+
+<h2 id="pendingFacultyCount">0</h2>
+
+<p>Pending Faculty</p>
+
+</div>
+
+</div>
 
 <br><br>
 
-<table border="1" width="100%" cellpadding="10" cellspacing="0">
+<!-- ================= ANALYTICS ================= -->
+
+<div class="dashboard-card">
+
+<h2>
+
+<i class="fa-solid fa-chart-pie"></i>
+
+Doubts Analytics
+
+</h2>
+
+<br>
+
+<canvas id="adminChart"></canvas>
+
+</div>
+
+<br><br>
+
+<!-- ================= SEARCH ================= -->
+
+<div class="dashboard-card">
+
+<h2>
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Search Doubts
+
+</h2>
+
+<br>
+
+<input
+
+type="text"
+
+id="search"
+
+class="search-box"
+
+placeholder="Search Student / Roll No / Subject..."
+
+onkeyup="searchDoubts()"
+
+>
+
+<br><br>
+
+<button class="hero-btn"
+
+onclick="loadAdmin()">
+
+<i class="fa-solid fa-rotate"></i>
+
+Refresh Dashboard
+
+</button>
+
+</div>
+
+<br><br>
+
+<!-- ================= DOUBTS ================= -->
+
+<div id="doubts"></div>
+
+<hr>
+
+<!-- =====================================================
+                FACULTY APPROVAL
+===================================================== -->
+
+<section class="dashboard">
+
+<h2>
+<i class="fa-solid fa-user-check"></i>
+Faculty Approval Requests
+</h2>
+
+<div style="text-align:right;margin-bottom:20px;">
+
+<button class="hero-btn" onclick="loadFaculty()">
+<i class="fa-solid fa-rotate"></i>
+Refresh Faculty
+</button>
+
+</div>
+
+<div class="table-container">
+
+<table class="modern-table">
+
+<thead>
+
+<tr>
+
+<th>Faculty ID</th>
+
+<th>Name</th>
+
+<th>Department</th>
+
+<th>Email</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="facultyTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<hr>
+
+<!-- =====================================================
+                STUDENT DETAILS
+===================================================== -->
+
+<section class="dashboard">
+
+<h2>
+
+<i class="fa-solid fa-user-graduate"></i>
+
+Student Details
+
+</h2>
+
+<div style="text-align:right;margin-bottom:20px;">
+
+<button class="hero-btn" onclick="loadStudents()">
+
+<i class="fa-solid fa-rotate"></i>
+
+Refresh Students
+
+</button>
+
+</div>
+
+<div class="table-container">
+
+<table class="modern-table">
 
 <thead>
 
 <tr>
 
 <th>Roll No</th>
+
 <th>Name</th>
+
 <th>Department</th>
+
 <th>Year</th>
+
 <th>Section</th>
 
 </tr>
@@ -192,19 +318,35 @@
 
 </table>
 
-<br><br>
+</div>
 
-<hr><br>
+</section>
 
-<h2>👨‍💼 Admin Details</h2>
+<hr>
 
-<button onclick="loadAdmins()">
-    🔄 Refresh Admins
+<!-- =====================================================
+                ADMIN DETAILS
+===================================================== -->
+
+<section class="dashboard">
+
+<h2>
+<i class="fa-solid fa-user-shield"></i>
+Admin Details
+</h2>
+
+<div style="text-align:right;margin-bottom:20px;">
+
+<button class="hero-btn" onclick="loadAdmins()">
+<i class="fa-solid fa-rotate"></i>
+Refresh Admins
 </button>
 
-<br><br>
+</div>
 
-<table border="1" width="100%" cellpadding="10" cellspacing="0">
+<div class="table-container">
+
+<table class="modern-table">
 
 <thead>
 
@@ -225,20 +367,130 @@
 
 </table>
 
-<br><br>
-    <footer style="text-align:center;padding:20px;color:gray;">
-        HITAM AI Doubt Solving Portal © 2026
-    </footer>
+</div>
+
+</section>
+
+<!-- =====================================================
+                FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+<div class="footer-container">
+
+<div class="footer-column">
+
+<img src="images/hitam-logo.png"
+style="width:90px;">
+
+<h2>HITAM AI Portal</h2>
+
+<p>
+
+Empowering students and faculty through Artificial Intelligence,
+smart doubt resolution,
+real-time tracking,
+and digital learning.
+
+</p>
 
 </div>
+
+<div class="footer-column">
+
+<h3>Quick Links</h3>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="student.html">Student</a></li>
+
+<li><a href="faculty.html">Faculty</a></li>
+
+<li><a href="admin.html">Admin</a></li>
+
+</ul>
+
+</div>
+
+<div class="footer-column">
+
+<h3>Modules</h3>
+
+<ul>
+
+<li>Student Dashboard</li>
+
+<li>Faculty Dashboard</li>
+
+<li>Admin Dashboard</li>
+
+<li>AI Doubt Resolution</li>
+
+</ul>
+
+</div>
+
+<div class="footer-column">
+
+<h3>Contact</h3>
+
+<p>📍 HITAM, Hyderabad</p>
+
+<p>🌐 www.hitam.org</p>
+
+<p>📧 support@hitam.org</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="footer-bottom">
+
+<div class="social-icons">
+
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+
+<a href="#"><i class="fab fa-instagram"></i></a>
+
+<a href="#"><i class="fab fa-linkedin-in"></i></a>
+
+<a href="#"><i class="fab fa-youtube"></i></a>
+
+</div>
+
+<p>
+
+© 2026 HITAM Smart AI Doubt Resolution Portal
+
+</p>
+
+<p>
+
+Developed for HITAM Project
+
+</p>
+
+</div>
+
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
 
 <script src="auth.js"></script>
 
 <script>
+
 protectAdmin();
+
 </script>
 
 <script src="admin.js"></script>
 
 </body>
+
 </html>
