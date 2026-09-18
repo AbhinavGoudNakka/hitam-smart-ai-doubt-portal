@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
@@ -218,7 +220,12 @@ def get_doubts(db: Session):
     return db.query(models.Doubt).all()
 
 
-def answer_doubt(db: Session, doubt_id: int, answer: str):
+def answer_doubt(
+    db: Session,
+    doubt_id: int,
+    answer: str,
+    faculty_id: str = ""
+):
 
     doubt = db.query(models.Doubt).filter(
         models.Doubt.id == doubt_id
@@ -228,7 +235,9 @@ def answer_doubt(db: Session, doubt_id: int, answer: str):
         return None
 
     doubt.faculty_answer = answer
+    doubt.faculty_id = faculty_id
     doubt.status = "Verified"
+    doubt.verified_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     db.commit()
     db.refresh(doubt)

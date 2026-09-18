@@ -137,7 +137,8 @@ def answer_doubt(
     return crud.answer_doubt(
         db,
         doubt_id,
-        answer.faculty_answer
+        answer.faculty_answer,
+        answer.faculty_id
     )
 
 

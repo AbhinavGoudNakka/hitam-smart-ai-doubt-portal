@@ -11,9 +11,10 @@ async function loadFaculty() {
 
     // ---------- Faculty Name ----------
 
+    const loggedInFaculty = getFaculty();
+
     const facultyName =
-        localStorage.getItem("faculty_name") ||
-        localStorage.getItem("name") ||
+        (loggedInFaculty && loggedInFaculty.name) ||
         "Faculty";
 
     const welcome = document.getElementById("facultyWelcome");
@@ -111,8 +112,10 @@ async function verifyDoubt(id) {
     const answer =
         document.getElementById("reply" + id).value;
 
+    const loggedInFaculty = getFaculty();
+
     const facultyId =
-        localStorage.getItem("faculty_id") ||
+        (loggedInFaculty && loggedInFaculty.faculty_id) ||
         "FAC001";
 
     const response = await fetch(API + "/doubts/" + id, {
