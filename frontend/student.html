@@ -17,6 +17,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
+
 <nav>
 
 <div class="logo">
@@ -47,25 +49,40 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 </nav>
 
+<!-- ================= STUDENT DASHBOARD ================= -->
+
 <div class="dashboard">
 
-<button
-onclick="logout()"
-style="float:right;background:#e74c3c;color:white;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;">
+<div class="dashboard-header">
 
-🚪 Logout
+<div>
 
-</button>
-
-<h1>🎓 Student Dashboard</h1>
+<h1>
+<i class="fa-solid fa-graduation-cap"></i>
+Student Dashboard
+</h1>
 
 <p>Ask your academic doubts and receive AI + Faculty verified answers.</p>
 
-<br>
+</div>
 
-<div class="dashboard-card">
+<button
+class="hero-btn logout-btn"
+onclick="logout()">
 
-<h2 id="welcomeName">Welcome</h2>
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</button>
+
+</div>
+
+<!-- ================= WELCOME / PROFILE CARD ================= -->
+
+<div class="student-profile">
+
+<h2 id="welcomeName"><i class="fa-solid fa-circle-user"></i> Welcome</h2>
 
 <p><b>Roll Number:</b> <span id="welcomeRoll"></span></p>
 
@@ -77,51 +94,106 @@ style="float:right;background:#e74c3c;color:white;padding:10px 20px;border:none;
 
 </div>
 
-<br>
+<!-- ================= STAT CARDS ================= -->
+
+<div class="dashboard-cards">
 
 <div class="dashboard-card">
 
-<h2>Submit New Doubt</h2>
+<i class="fa-solid fa-book-open"></i>
+
+<h2 id="totalDoubts">0</h2>
+
+<p>Total Doubts</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-hourglass-half"></i>
+
+<h2 id="pendingDoubts">0</h2>
+
+<p>Pending Doubts</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<h2 id="verifiedDoubts">0</h2>
+
+<p>Verified Doubts</p>
+
+</div>
+
+</div>
+
+<br><br>
+
+<!-- ================= SUBMIT DOUBT ================= -->
+
+<div class="doubt-form">
+
+<h2><i class="fa-solid fa-circle-question"></i> Submit New Doubt</h2>
 
 <input
 id="category"
 type="text"
-placeholder="Subject">
-
-<br><br>
+placeholder="Subject (e.g. Data Structures)">
 
 <textarea
 id="question"
 rows="6"
 placeholder="Enter your doubt..."></textarea>
 
-<br><br>
+<div style="text-align:center;">
 
-<button onclick="submitDoubt()">
+<button class="submit-btn" onclick="submitDoubt()">
 
+<i class="fa-solid fa-paper-plane"></i>
 Submit Doubt
 
 </button>
 
 </div>
 
+</div>
+
 <br><br>
 
-<h2>My Doubts</h2>
+<!-- ================= MY DOUBTS ================= -->
 
-<button onclick="loadDoubts()">
+<h2><i class="fa-solid fa-list-check"></i> My Doubts</h2>
 
-🔄 Refresh
+<input
+class="search-box"
+type="text"
+id="search"
+placeholder="🔍 Search Subject / Question..."
+onkeyup="searchDoubts()">
+
+<br><br>
+
+<div style="text-align:right;margin-bottom:20px;">
+
+<button class="hero-btn" onclick="loadDoubts()">
+
+<i class="fa-solid fa-rotate"></i>
+Refresh
 
 </button>
 
-<br><br>
+</div>
 
 <div id="doubtList">
 
 </div>
 
 </div>
+
+<!-- ================= FOOTER ================= -->
 
 <footer style="text-align:center;padding:20px;color:gray;">
 
@@ -136,3 +208,7 @@ protectStudent();
 </script>
 
 <script src="student.js"></script>
+
+</body>
+
+</html>

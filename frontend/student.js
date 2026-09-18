@@ -4,14 +4,14 @@ const API = "https://hitam-ai-backend-m3ka.onrender.com";
 // LOAD STUDENT DETAILS
 // ============================
 
-const student = JSON.parse(localStorage.getItem("student"));
+const student = getStudent();
 
 if (!student) {
     window.location.href = "login.html";
 }
 
 document.getElementById("welcomeName").innerHTML =
-    "👋 Welcome, " + student.name;
+    '<i class="fa-solid fa-circle-user"></i> Welcome, ' + student.name;
 
 document.getElementById("welcomeRoll").innerHTML =
     student.roll_no;
@@ -32,9 +32,9 @@ document.getElementById("welcomeSection").innerHTML =
 
 async function submitDoubt() {
 
-    const category = document.getElementById("category").value;
+    const category = document.getElementById("category").value.trim();
 
-    const question = document.getElementById("question").value;
+    const question = document.getElementById("question").value.trim();
 
     if(category==="" || question===""){
 
@@ -111,39 +111,58 @@ async function loadDoubts(){
 
         const doubts=await response.json();
 
-        let html="";
-
         const myDoubts=doubts.filter(
             d=>d.roll_no===student.roll_no
         );
 
+        // ---------- Stats ----------
+
+        const total = myDoubts.length;
+
+        const pending = myDoubts.filter(
+            d => d.status !== "Verified"
+        ).length;
+
+        const verified = myDoubts.filter(
+            d => d.status === "Verified"
+        ).length;
+
+        document.getElementById("totalDoubts").innerHTML = total;
+        document.getElementById("pendingDoubts").innerHTML = pending;
+        document.getElementById("verifiedDoubts").innerHTML = verified;
+
+        // ---------- Cards ----------
+
+        let html="";
+
         if(myDoubts.length===0){
 
-            html="<h3>No doubts submitted.</h3>";
+            html="<h3 style='text-align:center;color:gray;'>No doubts submitted yet.</h3>";
 
         }else{
 
             myDoubts.reverse().forEach(d=>{
 
+                const statusClass =
+                    d.status === "Verified"
+                        ? "status-verified"
+                        : "status-pending";
+
                 html+=`
+<div class="student-doubt-card">
 
-                <div class="dashboard-card">
+<h3><i class="fa-solid fa-book"></i> ${d.category}</h3>
 
-                <h3>${d.category}</h3>
+<p><b>Question:</b><br>${d.question}</p>
 
-                <p><b>Question:</b><br>${d.question}</p>
+<p><b>🤖 AI Answer:</b><br>${d.answer||"Waiting..."}</p>
 
-                <p><b>AI Answer:</b><br>${d.answer||"Waiting..."}</p>
+<p><b>👨‍🏫 Faculty Answer:</b><br>${d.faculty_answer||"Waiting for Faculty..."}</p>
 
-                <p><b>Faculty Answer:</b><br>${d.faculty_answer||"Waiting..."}</p>
+<p><b>Status:</b> <span class="${statusClass}">${d.status}</span></p>
 
-                <p><b>Status:</b> ${d.status}</p>
-
-                </div>
-
-                <br>
-
-                `;
+</div>
+`;
 
             });
 
@@ -158,5 +177,37 @@ async function loadDoubts(){
     }
 
 }
+
+
+// ============================
+// SEARCH MY DOUBTS
+// ============================
+
+function searchDoubts(){
+
+    const input =
+        document.getElementById("search")
+        .value.toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".student-doubt-card");
+
+    cards.forEach(card=>{
+
+        card.style.display =
+            card.innerText.toLowerCase().includes(input)
+                ? ""
+                : "none";
+
+    });
+
+}
+
+
+// ============================
+// AUTO REFRESH
+// ============================
+
+setInterval(loadDoubts, 10000);
 
 loadDoubts();

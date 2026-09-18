@@ -11,17 +11,22 @@ async function loadAdmin() {
     // Statistics
 const [
     statsResponse,
-    pendingResponse,
     doubtsResponse
 ] = await Promise.all([
     fetch(API + "/admin/stats"),
-    fetch(API + "/faculty/pending"),
     fetch(API + "/doubts")
 ]);
 
 const stats = await statsResponse.json();
-const pendingFaculty = await pendingResponse.json();
 const doubts = await doubtsResponse.json();
+
+    // ---------- Statistic Cards ----------
+
+    document.getElementById("adminStudents").innerHTML = stats.students;
+    document.getElementById("adminDoubts").innerHTML = stats.total_doubts;
+    document.getElementById("adminPending").innerHTML = stats.pending;
+    document.getElementById("adminVerified").innerHTML = stats.verified;
+    document.getElementById("pendingFacultyCount").innerHTML = stats.pending_faculty;
 
     let html = "";
 

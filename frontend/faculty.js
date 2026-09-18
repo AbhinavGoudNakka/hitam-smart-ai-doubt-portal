@@ -63,11 +63,8 @@ async function loadFaculty() {
 <textarea
 id="reply${d.id}"
 rows="4"
-style="width:100%;padding:8px;border-radius:8px;">
-
-${d.faculty_answer || ""}
-
-</textarea>
+class="reply-textarea"
+placeholder="Write your verified answer...">${d.faculty_answer && d.faculty_answer !== "Waiting for Faculty..." ? d.faculty_answer : ""}</textarea>
 
 </td>
 
@@ -86,9 +83,10 @@ ${d.status}
 <td>
 
 <button
+class="verify-btn"
 onclick="verifyDoubt(${d.id})">
 
-✅ Verify
+<i class="fa-solid fa-check"></i> Verify
 
 </button>
 
@@ -180,9 +178,24 @@ function searchDoubts(){
 
 // ==============================
 // Auto Refresh
+// (skipped while faculty is actively typing a reply,
+// so in-progress answers don't get wiped out)
 // ==============================
 
-setInterval(loadFaculty,10000);
+setInterval(() => {
+
+    const active = document.activeElement;
+
+    const isTypingReply =
+        active &&
+        active.classList &&
+        active.classList.contains("reply-textarea");
+
+    if (!isTypingReply) {
+        loadFaculty();
+    }
+
+}, 10000);
 
 // ==============================
 // Initial Load
