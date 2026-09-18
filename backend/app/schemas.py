@@ -12,12 +12,21 @@ class StudentCreate(BaseModel):
     department: str
     year: str
     section: str
-    password: str
+
+    # Optional. The portal supports password-less student sign-in
+    # (Roll No only). Kept optional so older clients that still send
+    # a password continue to work.
+    password: Optional[str] = None
 
 
 class StudentLogin(BaseModel):
     roll_no: str
     password: str
+
+
+# Simplified student sign-in: Roll Number only, no password.
+class StudentIdLogin(BaseModel):
+    roll_no: str
 
 
 class StudentResponse(BaseModel):

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login | HITAM AI</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body class="login-body">
+
+<div class="login-container">
+
+<div class="login-box">
+
+<img src="images/hitam-logo.png" class="login-logo">
+
+<h1>HITAM</h1>
+
+<p>Administration Portal</p>
+
+<h2>
+<i class="fa-solid fa-user-shield"></i>
+Admin Login
+</h2>
+
+<input
+type="text"
+id="adminUsername"
+placeholder="Admin Username"
+autocomplete="off"
+onkeydown="if(event.key==='Enter'){adminLogin();}">
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Password"
+onkeydown="if(event.key==='Enter'){adminLogin();}">
+
+<button onclick="adminLogin()">
+<i class="fa-solid fa-right-to-bracket"></i>
+Login
+</button>
+
+<p id="adminMsg"
+style="color:#c0392b;font-size:14px;min-height:20px;margin-top:12px;"></p>
+
+<br>
+
+<p style="font-size:14px;">
+Not an administrator?
+<a href="login.html">Student / Faculty Login</a>
+</p>
+
+<a href="index.html">&#11013; Back to Home</a>
+
+</div>
+
+</div>
+
+<script src="auth.js"></script>
+
+<script>
+
+const API = "https://hitam-ai-backend-m3ka.onrender.com";
+
+async function adminLogin() {
+
+    const username =
+        document.getElementById("adminUsername").value.trim();
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    const msg = document.getElementById("adminMsg");
+
+    msg.innerHTML = "";
+
+    if (username === "" || password === "") {
+        msg.innerHTML = "Please enter Username and Password";
+        return;
+    }
+
+    try {
+
+        const response = await fetch(API + "/admin/login", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            msg.innerHTML = result.detail || "Invalid Username or Password";
+            return;
+        }
+
+        saveAdmin(result.admin);
+
+        localStorage.setItem("userRole", "admin");
+
+        window.location.href = "admin.html";
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        msg.innerHTML = "Cannot connect to the backend server.";
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

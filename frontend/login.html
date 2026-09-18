@@ -30,17 +30,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <h2>Smart AI Doubt Resolution Portal</h2>
 
-<input
-type="text"
-id="username"
-placeholder="Roll No / Faculty ID / Admin Username">
-
-<input
-type="password"
-id="password"
-placeholder="Password">
-
-<select id="role">
+<!-- Role first, so the rest of the form can adapt to it -->
+<select id="role" onchange="roleChanged()">
 
 <option value="student">Student</option>
 
@@ -50,6 +41,26 @@ placeholder="Password">
 
 </select>
 
+<input
+type="text"
+id="username"
+placeholder="Roll Number"
+autocomplete="off"
+onkeydown="if(event.key==='Enter'){login();}">
+
+<!-- Hidden for students: student sign-in needs the Roll Number only -->
+<input
+type="password"
+id="password"
+placeholder="Password"
+style="display:none;"
+onkeydown="if(event.key==='Enter'){login();}">
+
+<p id="loginHint"
+style="font-size:13px;color:#555;margin:0 0 12px;line-height:1.5;">
+Students: just enter your Roll Number. No password needed.
+</p>
+
 <button onclick="login()">
 
 <i class="fa-solid fa-right-to-bracket"></i>
@@ -57,6 +68,20 @@ placeholder="Password">
 Login
 
 </button>
+
+<br><br>
+
+<p style="font-size:14px;">
+New student? <a href="register.html">Register here</a>
+</p>
+
+<p style="font-size:14px;">
+<a href="admin-login.html">
+<i class="fa-solid fa-user-shield"></i> Admin Login
+</a>
+</p>
+
+<a href="index.html">&#11013; Back to Home</a>
 
 </div>
 
@@ -66,8 +91,4 @@ Login
 <script src="login.js"></script>
 
 </body>
-</html>
-
-</body>
-
 </html>

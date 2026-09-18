@@ -72,6 +72,36 @@ def register_student(
     return crud.create_student(db, student)
 
 
+@app.post("/students/login-id")
+def login_student_by_id(
+    student: schemas.StudentIdLogin,
+    db: Session = Depends(get_db)
+):
+    """
+    Simplified student sign-in: Roll Number only, no password.
+    Students are identified, not authenticated - see design doc.
+    """
+
+    user = crud.login_student_by_id(db, student.roll_no)
+
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="Roll Number not found. Please check and try again."
+        )
+
+    return {
+        "message": "Login Successful",
+        "student": {
+            "roll_no": user.roll_no,
+            "name": user.name,
+            "department": user.department,
+            "year": user.year,
+            "section": user.section
+        }
+    }
+
+
 @app.post("/students/login")
 def login_student(
     student: schemas.StudentLogin,

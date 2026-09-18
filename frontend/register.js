@@ -12,7 +12,8 @@ async function registerStudent() {
         department: document.getElementById("department").value,
         year: document.getElementById("year").value,
         section: document.getElementById("section").value,
-        password: document.getElementById("password").value
+        // Optional - students sign in with Roll Number only
+        password: document.getElementById("password").value || null
     };
 
     try {

@@ -21,13 +21,18 @@ def create_student(db: Session, student: schemas.StudentCreate):
     if existing:
         return existing
 
+    # Password is optional. When the student registers without one
+    # (password-less / Roll-No-only sign-in), we still store a hash so the
+    # NOT NULL column stays valid, but it is never used to log in.
+    raw_password = student.password or f"noauth:{student.roll_no}"
+
     new_student = models.Student(
         roll_no=student.roll_no,
         name=student.name,
         department=student.department,
         year=student.year,
         section=student.section,
-        password=hash_password(student.password)
+        password=hash_password(raw_password)
     )
 
     db.add(new_student)
@@ -35,6 +40,29 @@ def create_student(db: Session, student: schemas.StudentCreate):
     db.refresh(new_student)
 
     return new_student
+
+
+def login_student_by_id(db: Session, roll_no: str):
+    """
+    Simplified student sign-in used by the portal.
+
+    The student only enters their Roll Number. No password is collected
+    or stored for students. This is deliberate: the student record holds
+    only ID, name, branch and (optionally) a photo, so there is no
+    sensitive data behind this login.
+
+    NOTE: this is identification, not authentication. Anyone who knows a
+    valid roll number can open that student's view. Acceptable for a
+    college project running on dummy data; see the "Privacy and Security"
+    section of the design document before using real student data.
+    """
+
+    if not roll_no:
+        return None
+
+    return db.query(models.Student).filter(
+        models.Student.roll_no == roll_no.strip()
+    ).first()
 
 
 def login_student(db: Session, roll_no: str, password: str):
