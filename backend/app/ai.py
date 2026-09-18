@@ -1,28 +1,32 @@
 import os
 from dotenv import load_dotenv
-from google import genai
+from anthropic import Anthropic
 
 load_dotenv()
 
-API_KEY = os.getenv("GEMINI_API_KEY")
+API_KEY = os.getenv("ANTHROPIC_API_KEY")
 
 print("=" * 60)
-print("Gemini Key Loaded:", bool(API_KEY))
+print("Anthropic Key Loaded:", bool(API_KEY))
 
 if API_KEY:
     print("First 12 chars:", API_KEY[:12])
 else:
-    print("NO GEMINI KEY FOUND")
+    print("NO ANTHROPIC KEY FOUND")
 print("=" * 60)
 
-client = genai.Client(api_key=API_KEY)
+client = Anthropic(api_key=API_KEY)
+
+# Fast + cheap, good fit for a student doubt-answering bot.
+# Swap to "claude-sonnet-5" if you want noticeably higher-quality answers
+# at a higher cost per request.
+MODEL = "claude-haiku-4-5-20251001"
 
 
 def generate_ai_answer(question: str):
     try:
 
-        prompt = f"""
-You are an expert engineering faculty member.
+        prompt = f"""You are an expert engineering faculty member.
 
 Answer the student's academic question clearly.
 
@@ -36,16 +40,19 @@ Rules:
 - Give code example if required
 """
 
-        response = client.models.generate_content(
-            model="gemini-flash-latest",
-            contents=prompt,
+        response = client.messages.create(
+            model=MODEL,
+            max_tokens=1024,
+            messages=[
+                {"role": "user", "content": prompt}
+            ],
         )
 
-        return response.text
+        return response.content[0].text
 
     except Exception as e:
         print("=" * 60)
-        print("GEMINI ERROR")
+        print("CLAUDE ERROR")
         print(repr(e))
         print("=" * 60)
 
